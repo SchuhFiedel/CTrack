@@ -4,7 +4,12 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CUSTOMEV_DBNAME": "ctrack_dev",
+        "CUSTOMEV_DBHOSTADDRESS": "localhost:5432",
+        "CUSTOMEV_DBPW": "pa55w0rd!",
+        "CUSTOMEV_DBUSER": "postgres",
+        "CUSTOMEV_DBRESET": "true"
       },
       "dotnetRunMessages": true,
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",

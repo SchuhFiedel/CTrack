@@ -3,16 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrack.Server", "Server\CTrack.Server.csproj", "{5C44D427-A8B5-40DC-9AA3-7F522C52D5DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Server", "Server\CTrack.Server.csproj", "{5C44D427-A8B5-40DC-9AA3-7F522C52D5DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrack.Client", "Client\CTrack.Client.csproj", "{A742FA5C-41D5-4AC3-A9A3-BCAD9FBC8633}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Client", "Client\CTrack.Client.csproj", "{A742FA5C-41D5-4AC3-A9A3-BCAD9FBC8633}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrack.Shared", "Shared\CTrack.Shared.csproj", "{CA7B45B5-0106-4DF6-8C04-67D12D8F436B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Shared", "Shared\CTrack.Shared.csproj", "{CA7B45B5-0106-4DF6-8C04-67D12D8F436B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{88AD38EF-9100-4C7E-B07C-8FC46537AE62}"
 	ProjectSection(SolutionItems) = preProject
 		Dockerfile = Dockerfile
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrack.Server.Services", "CTrack.Server.Services\CTrack.Server.Services.csproj", "{73659B43-5545-4C17-9F72-1422D7FF183B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrack.Server.Contracts", "CTrack.Server.Contracts\CTrack.Server.Contracts.csproj", "{950637AE-F802-4144-8034-335F820CE15E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrackServer.DAL", "CTrackServer.DAL\CTrackServer.DAL.csproj", "{6A67F149-5202-4D17-8353-9AC02A28B3E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +38,18 @@ Global
 		{CA7B45B5-0106-4DF6-8C04-67D12D8F436B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA7B45B5-0106-4DF6-8C04-67D12D8F436B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA7B45B5-0106-4DF6-8C04-67D12D8F436B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73659B43-5545-4C17-9F72-1422D7FF183B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73659B43-5545-4C17-9F72-1422D7FF183B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73659B43-5545-4C17-9F72-1422D7FF183B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73659B43-5545-4C17-9F72-1422D7FF183B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{950637AE-F802-4144-8034-335F820CE15E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{950637AE-F802-4144-8034-335F820CE15E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{950637AE-F802-4144-8034-335F820CE15E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{950637AE-F802-4144-8034-335F820CE15E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A67F149-5202-4D17-8353-9AC02A28B3E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A67F149-5202-4D17-8353-9AC02A28B3E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A67F149-5202-4D17-8353-9AC02A28B3E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A67F149-5202-4D17-8353-9AC02A28B3E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

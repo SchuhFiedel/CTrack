@@ -1,8 +1,7 @@
-using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
-using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.ResponseCompression;
-using System.Security.Cryptography.X509Certificates;
+
+using CTrack.Server;
+using System.Collections;
+
 
 namespace CTrack
 {
@@ -16,6 +15,9 @@ namespace CTrack
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+
+            //register Services
+            DependencyRegistrationManager.Register(builder.Services);
 
             var app = builder.Build();
             

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,8 @@ namespace CTrack.Shared.Models
     public class UserModel: Model
     {
         public List<UserRole> Roles = new();
-        Email Email { get; set; }
+        public Email Email { get; set; }
+        public string PasswordHash { get; set; }
 
 #region constructors
         public UserModel(Email email, IEnumerable<UserRole> roles)
