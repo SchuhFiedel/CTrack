@@ -1,0 +1,87 @@
+﻿@page "/registration"
+@using System.ComponentModel.DataAnnotations
+
+<div class="d-flex justify-center">
+<h1>Registration</h1>
+</div>
+<div class="d-flex justify-center" >
+    <MudForm Model="@model" @ref=form OnValidSubmit="RegisterAction"
+        Validation=@this.Validator.ValidateValue @bind-Errors=@errors IsValid=@success >
+        <MudGrid>
+            <MudItem xs="12" sm="7">
+                <MudCard>
+                    <MudCardContent>
+                        <MudTextField Label="Username" 
+                        @bind-Value="model.Username" For="@(() => model.Username)" />
+                        <MudTextField Label="Email" Class="mt-3"
+                        @bind-Value="model.Email" For="@(() => model.Email)" />
+                        <MudTextField Label="Password" HelperText="Choose a strong password - Min. 8 characters" Class="mt-3"
+                        @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" />
+                        <MudTextField Label="Password" HelperText="Repeat the password" Class="mt-3"
+                        @bind-Value="model.Password2" For="@(() => model.Password2)" InputType="InputType.Password" />
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled"
+                            Color="Color.Primary" Class="ml-auto" Disabled="@(!success)">Register</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+            <MudItem xs="12" sm="5">
+                <MudPaper Class="pa-4 mud-height-full">
+                    <MudText Typo="Typo.subtitle2">Validation Summary</MudText>
+                    @if (!success)
+                    {
+                        @success
+                        <MudText Color="@Color.Error">
+                            @foreach (var error in errors)
+                            {
+                                <MudText Color="@Color.Error">@error</MudText>
+                            }
+                        </MudText>
+                        
+                        @if (errors.Length <= 0)
+                        {
+                            success = true;
+                        }
+                    }
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12">
+                <MudText Typo="Typo.body2" Align="Align.Center">
+                    Fill out the form correctly to see the success message.
+                </MudText>
+            </MudItem>
+        </MudGrid>
+    </MudForm>
+</div>
+
+
+@code {
+
+    RegisterFormModel model = new RegisterFormModel();
+    bool success;
+    RegisterFormModelValidator Validator = new RegisterFormModelValidator();
+    string[] errors = { };
+    MudForm form = new MudForm();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            success = false;
+            await form.Validate();
+            var x = Validator.Validate(model).Errors.Select(x => x.ErrorMessage).ToArray<string>();
+            if (x.Length > 0)
+            {
+                errors = x;
+            }
+            StateHasChanged();
+        }
+    }
+
+    private async Task RegisterAction()
+    {
+        Console.WriteLine("REGISTERACTION");
+    }
+}
+

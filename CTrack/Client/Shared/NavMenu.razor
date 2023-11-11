@@ -1,4 +1,13 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿<MudAppBar Color="Color.Primary" Fixed="false" Elevation="0">
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" @onclick="ToggleNavMenu" />
+    <MudLink Color="Color.Inherit" Href="/">Track Title</MudLink>
+    <MudLink Color="Color.Inherit" Href="/registration">Registration</MudLink>
+    <MudSpacer />
+    <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" />
+</MudAppBar>
+
+<!--
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">CTrack</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -6,8 +15,9 @@
         </button>
     </div>
 </div>
+-->
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+<div class="@NavMenuCssClass">
     <nav class="flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
@@ -37,3 +47,4 @@
         collapseNavMenu = !collapseNavMenu;
     }
 }
+
