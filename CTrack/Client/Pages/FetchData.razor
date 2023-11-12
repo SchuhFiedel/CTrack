@@ -1,5 +1,4 @@
 ﻿@page "/fetchdata"
-@using CTrack.Shared.Models
 @inject HttpClient Http
 
 <PageTitle>Weather forecast</PageTitle>
@@ -38,10 +37,10 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private WeatherForecastDTO[]? forecasts;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        forecasts = await Http.GetFromJsonAsync<WeatherForecastDTO[]>("WeatherForecast");
     }
 }

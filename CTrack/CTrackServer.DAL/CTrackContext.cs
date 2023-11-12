@@ -1,6 +1,5 @@
 ﻿using CTrack.Server.Contracts;
 using CTrack.Server.Contracts.Services;
-using CTrack.Shared.Models;
 using CTrackServer.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,12 +21,12 @@ namespace CTrackServer.DAL
             this.Database.EnsureCreated();
 
             bool canConnect = this.Database.CanConnect();
-            Console.WriteLine("Can Connect: " + canConnect);
+            Console.WriteLine("Can Connect To DB: " + canConnect);
             if (!canConnect)
             {
                 throw new ArgumentException(this.Database.GetConnectionString(), "ConnectionString");
             }
-            Console.WriteLine("Provider name:" + this.Database.ProviderName);
+            Console.WriteLine("DB Provider name:" + this.Database.ProviderName);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

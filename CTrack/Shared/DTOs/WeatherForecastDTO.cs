@@ -1,6 +1,6 @@
-namespace CTrack.Shared.Models
+namespace CTrack.Shared.DTOs
 {
-    public class WeatherForecast
+    public class WeatherForecastDTO
     {
         public DateTime Date { get; set; }
 

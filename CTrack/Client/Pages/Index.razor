@@ -1,5 +1,5 @@
 ﻿@page "/"
-
+@using System.Linq
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
@@ -7,3 +7,17 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+<AuthorizeView>
+    <NotAuthorized>
+        <span>If you don't see this, you are not authorized buddy!</span>
+    </NotAuthorized>
+    <Authorized>
+        <span>If you see this, you are authorized, good job!</span>
+        <span>@foreach (var x in context.User.Identities)
+            {
+                @x.Name            
+            }
+        </span>
+    </Authorized>
+</AuthorizeView>

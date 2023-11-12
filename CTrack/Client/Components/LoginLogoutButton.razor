@@ -1,0 +1,25 @@
+﻿@inject NavigationManager navigationManager;
+@inject ILocalStorageService localStorageService;
+@inject AuthenticationStateProvider authStateProvider;
+
+<AuthorizeView>
+    <Authorized>
+        <button @onclick="Logout" class="btn btn-danger">Logout</button>
+    </Authorized>
+    <NotAuthorized>
+        <button @onclick="Login" class="btn btn-primary">Login</button>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    async Task Logout()
+    {
+        await localStorageService.RemoveItemAsync("token");
+        await authStateProvider.GetAuthenticationStateAsync();
+    }
+
+    void Login()
+    {
+        navigationManager.NavigateTo("login");
+    }
+}

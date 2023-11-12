@@ -1,5 +1,6 @@
 
 using CTrack.Server;
+using CTrack.Shared.DTOs;
 using System.Collections;
 
 
@@ -35,7 +36,6 @@ namespace CTrack
             app.UseStaticFiles();
 
             app.UseRouting();
-
 
             app.MapRazorPages();
             app.MapControllers();

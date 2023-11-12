@@ -14,11 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Pr
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrack.Server.Services", "CTrack.Server.Services\CTrack.Server.Services.csproj", "{73659B43-5545-4C17-9F72-1422D7FF183B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Server.Services", "CTrack.Server.Services\CTrack.Server.Services.csproj", "{73659B43-5545-4C17-9F72-1422D7FF183B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrack.Server.Contracts", "CTrack.Server.Contracts\CTrack.Server.Contracts.csproj", "{950637AE-F802-4144-8034-335F820CE15E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Server.Contracts", "CTrack.Server.Contracts\CTrack.Server.Contracts.csproj", "{950637AE-F802-4144-8034-335F820CE15E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrackServer.DAL", "CTrackServer.DAL\CTrackServer.DAL.csproj", "{6A67F149-5202-4D17-8353-9AC02A28B3E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Server.DAL", "CTrackServer.DAL\CTrack.Server.DAL.csproj", "{6A67F149-5202-4D17-8353-9AC02A28B3E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

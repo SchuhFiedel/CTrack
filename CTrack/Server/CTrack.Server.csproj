@@ -18,7 +18,7 @@
     <ProjectReference Include="..\Client\CTrack.Client.csproj" />
     <ProjectReference Include="..\CTrack.Server.Contracts\CTrack.Server.Contracts.csproj" />
     <ProjectReference Include="..\CTrack.Server.Services\CTrack.Server.Services.csproj" />
-    <ProjectReference Include="..\CTrackServer.DAL\CTrackServer.DAL.csproj" />
+    <ProjectReference Include="..\CTrackServer.DAL\CTrack.Server.DAL.csproj" />
     <ProjectReference Include="..\Shared\CTrack.Shared.csproj" />
   </ItemGroup>
 

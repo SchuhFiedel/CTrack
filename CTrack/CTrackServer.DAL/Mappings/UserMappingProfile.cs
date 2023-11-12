@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using CTrack.Shared.Models;
 using CTrackServer.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CTrackServer.DAL.Mappings
 {
