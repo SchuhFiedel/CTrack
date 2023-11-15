@@ -1,4 +1,4 @@
-﻿namespace CTrack.Server.Contracts.Services
+﻿namespace CTrack.Server.Shared.Contracts.Services
 {
     public interface ICustomEnvVarService
     {
@@ -7,5 +7,6 @@
         public string? DataBasePassword { get; set; }
         public string? DataBaseUser { get; set; }
         public bool DataBaseReset { get; set; }
+        public string? JWTSecretKey { get; set; }
     }
 }

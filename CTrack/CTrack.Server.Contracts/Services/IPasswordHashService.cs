@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CTrack.Server.Contracts.Services
+namespace CTrack.Server.Shared.Contracts.Services
 {
     public interface IPasswordHashService
     {

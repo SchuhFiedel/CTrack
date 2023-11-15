@@ -1,4 +1,4 @@
-namespace CTrack.Shared.DTOs
+namespace CTrack.Shared.Models.DTOs
 {
     public class WeatherForecastDTO
     {

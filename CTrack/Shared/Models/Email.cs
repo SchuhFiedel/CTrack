@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace CTrack.Shared.Models
+namespace CTrack.Shared.Models.Models
 {
     public class Email: ModelOverrides
     {

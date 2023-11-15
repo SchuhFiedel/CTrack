@@ -1,4 +1,4 @@
-﻿using CTrack.Server.Contracts.Services;
+﻿using CTrack.Server.Shared.Contracts.Services;
 using System.Security.Cryptography;
 
 namespace CTrack.Server.Services

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Server", "Server\CTr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Client", "Client\CTrack.Client.csproj", "{A742FA5C-41D5-4AC3-A9A3-BCAD9FBC8633}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Shared", "Shared\CTrack.Shared.csproj", "{CA7B45B5-0106-4DF6-8C04-67D12D8F436B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Shared.Models", "Shared\CTrack.Shared.Models.csproj", "{CA7B45B5-0106-4DF6-8C04-67D12D8F436B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{88AD38EF-9100-4C7E-B07C-8FC46537AE62}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,9 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Pr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Server.Services", "CTrack.Server.Services\CTrack.Server.Services.csproj", "{73659B43-5545-4C17-9F72-1422D7FF183B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Server.Contracts", "CTrack.Server.Contracts\CTrack.Server.Contracts.csproj", "{950637AE-F802-4144-8034-335F820CE15E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Server.Shared.Contracts", "CTrack.Server.Contracts\CTrack.Server.Shared.Contracts.csproj", "{950637AE-F802-4144-8034-335F820CE15E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Server.DAL", "CTrackServer.DAL\CTrack.Server.DAL.csproj", "{6A67F149-5202-4D17-8353-9AC02A28B3E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrack.Server.Shared", "CTrack.Server.Shared\CTrack.Server.Shared.csproj", "{44E15C80-FB47-40B8-8352-F79FA73D38BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{6A67F149-5202-4D17-8353-9AC02A28B3E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A67F149-5202-4D17-8353-9AC02A28B3E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A67F149-5202-4D17-8353-9AC02A28B3E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44E15C80-FB47-40B8-8352-F79FA73D38BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44E15C80-FB47-40B8-8352-F79FA73D38BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44E15C80-FB47-40B8-8352-F79FA73D38BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44E15C80-FB47-40B8-8352-F79FA73D38BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

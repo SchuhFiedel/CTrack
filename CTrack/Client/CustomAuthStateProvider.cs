@@ -18,7 +18,6 @@ namespace CTrack.Client
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            //string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJKb2huIERvZSIsImlhdCI6MTUxNjIzOTAyMn0.jFrtcJDg4HJVANTiHZy8RHJd6udTy_BbAOsu9sbXi9k";
             string token = await _localStorage.GetItemAsStringAsync("token");
 
             var identity = new ClaimsIdentity();

@@ -22,7 +22,7 @@
 
     async Task HandleLogin()
     {
-        var result = await Http.PostAsJsonAsync("auth", user);
+        var result = await Http.PostAsJsonAsync("Auth/login", user);
         var token = await result.Content.ReadAsStringAsync();
         Console.WriteLine(token);
         await localStorageService.SetItemAsync("token", token);

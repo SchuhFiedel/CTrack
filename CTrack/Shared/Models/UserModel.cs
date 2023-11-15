@@ -1,8 +1,10 @@
 ﻿
-namespace CTrack.Shared.Models
+
+namespace CTrack.Shared.Models.Models
 {
     public enum UserRole
     {
+        Standard = 0,
         Admin = 1,
     }
 
@@ -13,6 +15,8 @@ namespace CTrack.Shared.Models
         public string PasswordHash { get; set; }
 
 #region constructors
+#pragma warning disable CS8618
+
         public UserModel(Email email, IEnumerable<UserRole> roles)
         {
             Email = email;
@@ -24,7 +28,6 @@ namespace CTrack.Shared.Models
         public UserModel(Email email): this(email, new List<UserRole>())
         { }
 
-#pragma warning disable CS8618
         /// <summary>
         /// Do not use this
         /// </summary>

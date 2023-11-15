@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CTrack.Shared.DTOs
+namespace CTrack.Shared.Models.Models.DTOs
 {
     public class UserLoginDTO
     {

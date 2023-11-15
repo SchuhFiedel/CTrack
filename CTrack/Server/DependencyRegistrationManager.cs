@@ -1,6 +1,9 @@
-﻿using CTrack.Server.Contracts;
-using CTrack.Server.Contracts.Services;
+﻿
+using CTrack.Server.DAL.Repos;
 using CTrack.Server.Services;
+using CTrack.Server.Shared.Contracts.Repos;
+using CTrack.Server.Shared.Contracts.Services;
+using CTrack.Shared.Models.Entities;
 using CTrackServer.DAL;
 
 namespace CTrack.Server
@@ -9,9 +12,10 @@ namespace CTrack.Server
     {
         public static void Register(IServiceCollection services)
         {
-            services.AddSingleton<ICustomEnvVarService, CustomEnvVarService>();
-            services.AddSingleton<ICTrackContext, CTrackContext>();
+            services.AddSingleton<ICTrackContext<Entity>, CTrackContext>();
             services.AddSingleton<IPasswordHashService, PasswordHashService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepo, UserRepo>();
         }
     }
 }

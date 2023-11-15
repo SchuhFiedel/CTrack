@@ -1,7 +1,5 @@
-using CTrack.Server.Contracts;
-using CTrack.Server.Contracts.Services;
-using CTrack.Shared.DTOs;
-using Microsoft.AspNetCore.Authorization;
+using CTrack.Server.Shared.Contracts.Repos;
+using CTrack.Shared.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CTrack.Server.Controllers
@@ -17,12 +15,10 @@ namespace CTrack.Server.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly ICTrackContext cTrackContext; 
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, ICTrackContext cTrackContext)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
-            this.cTrackContext = cTrackContext;
         }
 
         [HttpGet]

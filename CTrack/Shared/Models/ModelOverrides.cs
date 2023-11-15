@@ -1,5 +1,5 @@
 ﻿
-namespace CTrack.Shared.Models
+namespace CTrack.Shared.Models.Models
 {
     public abstract class ModelOverrides
     {

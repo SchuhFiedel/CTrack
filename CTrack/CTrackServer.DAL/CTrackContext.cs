@@ -1,21 +1,22 @@
-﻿using CTrack.Server.Contracts;
-using CTrack.Server.Contracts.Services;
-using CTrackServer.DAL.Entities;
+﻿using CTrack.Server.Shared;
+using CTrack.Server.Shared.Contracts.Repos;
+using CTrack.Server.Shared.Contracts.Services;
+using CTrack.Shared.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using Npgsql.Replication.PgOutput;
 
 namespace CTrackServer.DAL
 {
-    public class CTrackContext : DbContext, ICTrackContext
+    public class CTrackContext : DbContext, ICTrackContext<Entity>
     {
-        protected ICustomEnvVarService envVarService; 
-
         public DbSet<UserEntity> Users { get; set; }
 
-        public CTrackContext(ICustomEnvVarService envVarService)
+        public CTrackContext()
         {
-            this.envVarService = envVarService;
 
-            if (this.envVarService.DataBaseReset)
+            this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+            if (CustomEnvVarService.DataBaseReset)
                 this.Database.EnsureDeleted();
 
             this.Database.EnsureCreated();
@@ -32,36 +33,35 @@ namespace CTrackServer.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(
-                $"host={this.envVarService.HostAddress};" +
-                $"Database={this.envVarService.DataBaseName};" +
-                $"Password={this.envVarService.DataBasePassword};"+
-                $"Username={this.envVarService.DataBaseUser}");
+                $"host={CustomEnvVarService.HostAddress};" +
+                $"Database={CustomEnvVarService.DataBaseName};" +
+                $"Password={CustomEnvVarService.DataBasePassword};" +
+                $"Username={CustomEnvVarService.DataBaseUser}");
         }
 
-        void ICTrackContext.Add<TEntity>(TEntity entity)
+        public virtual Guid Add(Entity entity)
         {
-            Add(entity);
+            throw new NotImplementedException();
         }
 
-        void ICTrackContext.Update<TEntity>(TEntity entity)
+        public virtual void Update(Entity entity)
         {
-            Update(entity);
+            throw new NotImplementedException();
         }
 
-        void ICTrackContext.Remove<TEntity>(TEntity entity)
+        public virtual void Remove(Entity entity)
         {
-            Remove(entity);
+            throw new NotImplementedException();
         }
 
-        public IQueryable<TEntity> Query<TEntity>() where TEntity : class
+        public virtual IQueryable Query()
         {
-            return Set<TEntity>();
+            throw new NotImplementedException();
         }
 
-        public TEntity? GetById<TEntity, TId>(TId id) where TEntity : class
+        public virtual Entity? GetById(Guid id)
         {
-            var entity = Set<TEntity>().Find(id);
-            return entity;
+            throw new NotImplementedException();
         }
     }
 }

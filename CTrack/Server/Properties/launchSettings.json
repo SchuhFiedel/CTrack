@@ -9,7 +9,8 @@
         "CUSTOMEV_DBHOSTADDRESS": "localhost:5432",
         "CUSTOMEV_DBPW": "pa55w0rd!",
         "CUSTOMEV_DBUSER": "postgres",
-        "CUSTOMEV_DBRESET": "true"
+        "CUSTOMEV_DBRESET": "false",
+        "CUSTOMEV_JWTSECRET": "yApo6Y3OcX8GXgKXK158asf098219gsdjkfahpoi125oijkjaf098asfklepruipoaf7"
       },
       "dotnetRunMessages": true,
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",

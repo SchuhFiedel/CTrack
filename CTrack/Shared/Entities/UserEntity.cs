@@ -1,11 +1,8 @@
-﻿using CTrack.Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace CTrackServer.DAL.Entities
+using CTrack.Shared.Models.Models;
+
+namespace CTrack.Shared.Models.Entities
 {
     public class UserEntity: Entity
     {
