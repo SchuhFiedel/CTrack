@@ -1,0 +1,36 @@
+﻿@if (IsLoading)
+{
+    <div id="overlay"></div>
+    <div id="loader-wrapper">
+        @switch (LoaderType)
+        {
+            case LoaderTypes.Clock:
+                <div class="cssload-clock"></div>
+                break;
+            case LoaderTypes.TwoBubbles:
+                <div class="two-bubble-loader"></div>
+                break;
+        }
+           
+        @if (SpinnerText != null)
+        {
+            <span class="spinner-text">@SpinnerText</span>
+        }
+    </div>
+}
+
+@code{
+    public enum LoaderTypes
+    {
+        Clock,
+        TwoBubbles
+    }
+
+
+    [Parameter]
+    public bool IsLoading{ get; set;}
+    [Parameter]
+    public string? SpinnerText { get; set; } = null;
+    [Parameter]
+    public LoaderTypes LoaderType { get; set; } = LoaderTypes.Clock;
+}

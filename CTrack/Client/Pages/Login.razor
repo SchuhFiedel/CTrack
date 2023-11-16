@@ -1,8 +1,4 @@
 ﻿@page "/login"
-@inject HttpClient Http
-@inject AuthenticationStateProvider authStateProvider
-@inject ILocalStorageService localStorageService
-
 <PageTitle >Login</PageTitle>
 
 <h3>Login</h3>
@@ -16,13 +12,14 @@
     <button type="submit" class="btn btn-primary"> Do It! </button>
 </EditForm>
 
-@if (IsLoading)
-{
-    <span> LOADING SPINNER AYAYAY </span>
-}
-
+<ClockSpinner IsLoading=@IsLoading SpinnerText="We are logging you in mate!" LoaderType="ClockSpinner.LoaderTypes.TwoBubbles"></ClockSpinner>
 
 @code {
+    [Inject] protected HttpClient Http { get; set; }
+    [Inject] protected AuthenticationStateProvider authStateProvider { get; set; }
+    [Inject] protected ILocalStorageService localStorageService { get; set; }
+    [Inject] protected NavigationManager navigationmanager { get; set; }
+
     DTOUserLoginForm user = new DTOUserLoginForm();
     bool IsLoading { get; set; }
 
@@ -33,10 +30,15 @@
             IsLoading = true;
             await Task.Yield();
             var result = await Http.PostAsJsonAsync("Auth/login", user);
+
+            if (!result.IsSuccessStatusCode)
+                throw new ArgumentException("Login Unsuccessful!");
+
             var token = await result.Content.ReadAsStringAsync();
             Console.WriteLine(token);
             await localStorageService.SetItemAsync("token", token);
-            await authStateProvider.GetAuthenticationStateAsync();
+            Console.WriteLine(await authStateProvider.GetAuthenticationStateAsync());
+            navigationmanager.NavigateTo("/");
         }
         catch(Exception e)
         {
@@ -46,8 +48,5 @@
         {
             IsLoading = false;
         }
-
-
-        
     }
 }

@@ -35,4 +35,14 @@
     <UpToDateCheckInput Remove="Shared\NavMenu.razor.scss" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\css\app.css">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="components\ClockSpinner.razor.scss" />
+  </ItemGroup>
+
 </Project>
