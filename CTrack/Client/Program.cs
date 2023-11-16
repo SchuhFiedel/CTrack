@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CTrack.Client
 {
@@ -19,6 +20,7 @@ namespace CTrack.Client
             builder.Services.AddBlazoredLocalStorage();
 
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+
             builder.Services.AddAuthorizationCore();
 
             await builder.Build().RunAsync();

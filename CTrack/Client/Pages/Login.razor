@@ -16,16 +16,38 @@
     <button type="submit" class="btn btn-primary"> Do It! </button>
 </EditForm>
 
+@if (IsLoading)
+{
+    <span> LOADING SPINNER AYAYAY </span>
+}
+
 
 @code {
-    UserLoginDTO user = new UserLoginDTO();
+    DTOUserLoginForm user = new DTOUserLoginForm();
+    bool IsLoading { get; set; }
 
     async Task HandleLogin()
     {
-        var result = await Http.PostAsJsonAsync("Auth/login", user);
-        var token = await result.Content.ReadAsStringAsync();
-        Console.WriteLine(token);
-        await localStorageService.SetItemAsync("token", token);
-        await authStateProvider.GetAuthenticationStateAsync();
+        try
+        {
+            IsLoading = true;
+            await Task.Yield();
+            var result = await Http.PostAsJsonAsync("Auth/login", user);
+            var token = await result.Content.ReadAsStringAsync();
+            Console.WriteLine(token);
+            await localStorageService.SetItemAsync("token", token);
+            await authStateProvider.GetAuthenticationStateAsync();
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+
+
+        
     }
 }

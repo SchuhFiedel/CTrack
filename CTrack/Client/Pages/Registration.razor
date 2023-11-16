@@ -1,14 +1,11 @@
 ﻿@page "/registration"
-@inject HttpClient Http
-@inject AuthenticationStateProvider authStateProvider
-@inject ILocalStorageService localStorageService
 
 
 <div class="d-flex justify-center">
 <h1>Registration</h1>
 </div>
 <div class="d-flex justify-center" >
-    <MudForm Model="@model" @ref=form OnValidSubmit="RegisterAction"
+    <MudForm Model="@model" @ref=form 
         Validation=@this.Validator.ValidateValue @bind-Errors=@errors IsValid=@success >
         <MudGrid>
             <MudItem xs="12" sm="7">
@@ -24,8 +21,8 @@
                         @bind-Value="model.Password2" For="@(() => model.Password2)" InputType="InputType.Password" />
                     </MudCardContent>
                     <MudCardActions>
-                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled"
-                            Color="Color.Primary" Class="ml-auto" Disabled="@(!success)">Register</MudButton>
+                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled"
+                            Color="Color.Primary" Class="ml-auto" Disabled="@(!success)" OnClick="RegisterAction">Register</MudButton>
                     </MudCardActions>
                 </MudCard>
             </MudItem>
@@ -51,12 +48,17 @@
             </MudItem>
             <MudItem xs="12">
                 <MudText Typo="Typo.body2" Align="Align.Center">
-                    Fill out the form correctly to see the success message.
+                    Fill out the form correctly to be able to register.
                 </MudText>
             </MudItem>
         </MudGrid>
     </MudForm>
 </div>
+@if (IsLoading)
+{
+    <span> LOADING SPINNER AYAYAY </span>
+}
+
 
 
 @code {
@@ -66,6 +68,10 @@
     RegisterFormModelValidator Validator = new RegisterFormModelValidator();
     string[] errors = { };
     MudForm form = new MudForm();
+    bool IsLoading { get; set; }
+
+    [Inject] protected HttpClient Http { get; set; }
+    [Inject] protected ILocalStorageService localStorageService { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -84,18 +90,42 @@
 
     private async Task RegisterAction()
     {
-        var user = new UserLoginDTO()
+        try
+        {
+            IsLoading = true;
+            await Task.Yield();
+            await form.Validate();
+            var x = Validator.Validate(model).Errors.Select(x => x.ErrorMessage).ToArray<string>();
+            if (x.Length > 0)
             {
-                Email = model.Email,
-                Password = model.Password2
-            };
-        var result = await Http.PostAsJsonAsync("Auth/register", user);
-        Console.WriteLine(await result.Content.ReadAsStringAsync());
-        //var token = await result.Content.ReadAsStringAsync();
-        //Console.WriteLine(token);
-        //await localStorageService.SetItemAsync("token", token);
-        //await authStateProvider.GetAuthenticationStateAsync();
-        
+                errors = x;
+            }
+
+            if (!errors.Any())
+            {
+                var user = new DTOUserLoginForm()
+                    {
+                        Email = model.Email,
+                        Password = model.Password2
+                    };
+                var result = await Http.PostAsJsonAsync("Auth/register", user);
+                Console.WriteLine($"REULT {result}");
+                Console.WriteLine($"READ AS STRINGASYNC{await result.Content.ReadAsStringAsync()}");
+            }
+            else
+            {
+                IsLoading = false;
+                throw new System.ComponentModel.DataAnnotations.ValidationException(nameof(Models));
+            }
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        finally
+        {
+            IsLoading = false;
+        }        
     }
 }
 

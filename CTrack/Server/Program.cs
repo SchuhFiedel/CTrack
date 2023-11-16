@@ -1,7 +1,11 @@
 
 using CTrack.Server;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using CTrack.Server.Shared;
 
 namespace CTrack
 {
@@ -17,6 +21,18 @@ namespace CTrack
             builder.Services.AddRazorPages();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(GetAssemblies());
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                            .GetBytes(CustomEnvVarService.JWTSecretKey)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false                  
+                    };
+                });
 
             //register Services
             DependencyRegistrationManager.Register(builder.Services);
@@ -47,6 +63,9 @@ namespace CTrack
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blazor API V1");
             });
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
 
             app.Run();

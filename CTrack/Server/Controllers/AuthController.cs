@@ -11,6 +11,7 @@ namespace CTrack.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [AllowAnonymous]
     public class AuthController : ControllerBase
     {
 
@@ -25,21 +26,20 @@ namespace CTrack.Server.Controllers
 
         [AllowAnonymous]
         [HttpPost("Login")]
-        public async Task<ActionResult<string>> Login(UserLoginDTO request)
+        public async Task<ActionResult<string>> Login(DTOUserLoginForm request)
         {
             string token = this.userService.Login(request);
-            //string token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVG9ueSBTdGFyayIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Iklyb24gTWFuIiwiZXhwIjozMTY4NTQwMDAwfQ.IbVQa1lNYYOzwso69xYfsMOHnQfO3VLvVqV2SOXS7sTtyyZ8DEf5jmmwz2FGLJJvZnQKZuieHnmHkg7CGkDbvA";
             
             return Ok(token);
         }
 
         [AllowAnonymous]
         [HttpPost("Register")]
-        public async Task<ActionResult<UserModel>> Register (UserLoginDTO request){
-            UserModel user = userService.RegisterUser(request);
-            user.Email = new Email(request.Email);
+        public async Task<ActionResult> Register (DTOUserLoginForm request){
+            
+            userService.RegisterUser(request);
 
-            return Ok(user);
+            return Ok();
         }
     }
 }

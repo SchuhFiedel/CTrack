@@ -1,5 +1,6 @@
 using CTrack.Server.Shared.Contracts.Repos;
 using CTrack.Shared.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CTrack.Server.Controllers
@@ -7,6 +8,7 @@ namespace CTrack.Server.Controllers
     //[Authorize]
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

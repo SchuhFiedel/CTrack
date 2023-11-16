@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CTrack.Shared.Models.Models.DTOs
 {
-    public class UserLoginDTO
+    public class DTOUserLoginForm
     {
         public string Email { get; set; }
         public string Password { get; set; }

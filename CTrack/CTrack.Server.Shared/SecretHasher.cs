@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace CTrack.Shared.Models
+namespace CTrack.Server.Shared
 {
     public static class SecretHasher
     {

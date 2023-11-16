@@ -25,7 +25,7 @@ namespace CTrack.Server.Services
             this.mapper = mapper;
         }
 
-        public UserModel RegisterUser(UserLoginDTO request)
+        public async void RegisterUser(DTOUserLoginForm request)
         {
             UserModel model = UserModel.StandardUser(new Email(request.Email));
             model.PasswordHash = passwordHashService.Hash(request.Password);
@@ -34,11 +34,10 @@ namespace CTrack.Server.Services
 
             userRepo.Add(mapper.Map<UserModel, UserEntity>(model));
 
-            return model;
         }
 
         //https://www.ais.com/how-to-generate-a-jwt-token-using-net-6/
-        public string Login(UserLoginDTO request)
+        public string Login(DTOUserLoginForm request)
         {
             UserModel? model = mapper.Map<UserModel?>(userRepo.GetUserByName(request.Email));
             if (model == null)
