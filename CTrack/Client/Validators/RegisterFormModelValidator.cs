@@ -7,8 +7,6 @@ namespace CTrack.Client.Validators
     {
         public RegisterFormModelValidator()
         {
-            RuleFor(x => x.Username).NotEmpty().MinimumLength(3).MaximumLength(50).Matches(@"[a-zA-Z0-9]")
-                .WithMessage("Username must match Regex '[a-zA-Z0-9]'");
             RuleFor(x => x.Email).NotEmpty().EmailAddress();
             RuleFor(x => x.Password).NotEmpty()
                 .MinimumLength(8).WithMessage("Password must be at least 8 characters long.")

@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Server.Shared.Contra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Server.DAL", "CTrackServer.DAL\CTrack.Server.DAL.csproj", "{6A67F149-5202-4D17-8353-9AC02A28B3E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTrack.Server.Shared", "CTrack.Server.Shared\CTrack.Server.Shared.csproj", "{44E15C80-FB47-40B8-8352-F79FA73D38BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrack.Server.Shared", "CTrack.Server.Shared\CTrack.Server.Shared.csproj", "{44E15C80-FB47-40B8-8352-F79FA73D38BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

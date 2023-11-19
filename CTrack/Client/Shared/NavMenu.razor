@@ -1,8 +1,6 @@
 ﻿<MudAppBar Color="Color.Primary" Fixed="false" Elevation="0">
     <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" @onclick="ToggleNavMenu" />
     <MudLink Color="Color.Inherit" Href="/">Track Title</MudLink>
-    <MudLink Color="Color.Inherit" Href="/registration">Registration</MudLink>
-    <MudLink Color="Color.Inherit" Href="/login">login</MudLink>
     <MudSpacer />
     <LoginLogoutButton></LoginLogoutButton>
     <MudIconButton Href="https://github.com/SchuhFiedel/CTrack" Target="_blank" Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" />
@@ -19,25 +17,29 @@
 </div>
 -->
 
-<div class="@NavMenuCssClass">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
+<AuthorizeView>
+    <Authorized>
+        <div class="@NavMenuCssClass">
+            <nav class="flex-column">
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                        <span class="oi oi-home" aria-hidden="true"></span> Home
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="counter">
+                        <span class="oi oi-plus" aria-hidden="true"></span> Counter
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="fetchdata">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+                    </NavLink>
+                </div>
+            </nav>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
-    </nav>
-</div>
+    </Authorized>
+</AuthorizeView>
 
 @code {
     private bool collapseNavMenu = true;

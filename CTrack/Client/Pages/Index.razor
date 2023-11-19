@@ -1,5 +1,8 @@
 ﻿@page "/"
+
 @using System.Linq
+
+
 <PageTitle>Index</PageTitle>
 
 <div class="content">
@@ -9,17 +12,15 @@
 
     <SurveyPrompt Title="EEEEEEE" />
 
-    <AuthorizeView>
-        <NotAuthorized>
-            <span>If you don't see this, you are not authorized buddy!</span>
-        </NotAuthorized>
-        <Authorized>
-            <span>If you see this, you are authorized, good job!</span>
-            <span>@foreach (var x in context.User.Identities)
-                {
-                    @x.Name            
-                }
-            </span>
-        </Authorized>
-    </AuthorizeView>
+
+    <CustomAuthRedirect>
+        <span>If you see this, you are authorized, good job!</span>
+        <br />
+        <span>
+            @foreach (var x in context.User.Identities)
+            {
+                @x.Name
+            }
+        </span>
+    </CustomAuthRedirect>
 </div>

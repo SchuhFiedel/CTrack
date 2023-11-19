@@ -1,16 +1,62 @@
 ﻿@page "/login"
 <PageTitle >Login</PageTitle>
 
-<h3>Login</h3>
+<div class="d-flex justify-center">
+    <h1>Login</h1>
+</div>
+<div class="d-flex justify-center">
+    @*Validation=@this.Validator.ValidateValue @bind-Errors=@errors IsValid=@success*@
+    @*Disabled="@(!success)"*@
+    <MudForm Model="@user" @ref=form
+             >
+        <MudGrid>
+            <MudItem xs="12">
+                <MudCard>
+                    <MudCardContent>
 
+                        <MudTextField Label="Email" Class="mt-3"
+                        @bind-Value="user.Email" For="@(() => user.Email)" />
+                        <MudTextField Label="Password" HelperText="Choose a strong password - Min. 8 characters" Class="mt-3"
+                        @bind-Value="user.Password" For="@(() => user.Password)" InputType="InputType.Password" />
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled"
+                                   Color="Color.Primary" Class="ml-auto" OnClick="HandleLogin">Login</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+            @*
+            <MudItem xs="12" sm="5">
+                <MudPaper Class="pa-4 mud-height-full">
+                    <MudText Typo="Typo.subtitle2">Validation Summary</MudText>
+                    @if (!success)
+                    {
+                        @success
+                        <MudText Color="@Color.Error">
+                            @foreach (var error in errors)
+                            {
+                                <MudText Color="@Color.Error">@error</MudText>
+                            }
+                        </MudText>
 
-<EditForm Model="user" OnSubmit="HandleLogin">
-    <label for="username">email</label>
-    <InputText id="username" @bind-Value="user.Email" />
-    <label for="pw">password</label>
-    <InputText id="pw" @bind-Value="user.Password" />
-    <button type="submit" class="btn btn-primary"> Do It! </button>
-</EditForm>
+                        @if (errors.Length <= 0)
+                        {
+                            success = true;
+                        }
+                    }
+                </MudPaper>
+            </MudItem>
+            *@
+            
+            <MudItem xs="12">
+                <MudText Typo="Typo.body2" Align="Align.Center">
+                    <MudLink Href="/registration">Click here if you want to register!</MudLink>
+                </MudText>
+            </MudItem>
+            
+        </MudGrid>
+    </MudForm>
+</div>
 
 <ClockSpinner IsLoading=@IsLoading SpinnerText="We are logging you in mate!" LoaderType="ClockSpinner.LoaderTypes.TwoBubbles"></ClockSpinner>
 
@@ -21,6 +67,7 @@
     [Inject] protected NavigationManager navigationmanager { get; set; } = null!;
 
     DTOUserLoginForm user = new DTOUserLoginForm();
+    MudForm form = new MudForm();
     bool IsLoading { get; set; }
 
     async Task HandleLogin()

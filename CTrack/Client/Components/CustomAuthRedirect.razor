@@ -1,0 +1,19 @@
+﻿
+
+<ClockSpinner></ClockSpinner>
+
+<AuthorizeView ChildContent="@ChildContent">
+    <NotAuthorized>
+        <span>If you don't see this, you are not authorized buddy!</span>
+        @{
+            navManager.NavigateTo("login");
+        }
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    [Inject]
+    public NavigationManager navManager { get; set; } = null!;
+    [Parameter]
+    public RenderFragment<AuthenticationState> ChildContent { get; set; } = null!;
+}
