@@ -28,16 +28,16 @@ namespace CTrack.Server.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<string>> Login(DTOUserLoginForm request)
         {
-            string token = this.userService.Login(request);
+            string token = await this.userService.Login(request);
             
-            return Ok(token);
+            return  Ok(token);
         }
 
         [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<ActionResult> Register (DTOUserLoginForm request){
             
-            userService.RegisterUser(request);
+            await userService.RegisterUser(request);
 
             return Ok();
         }

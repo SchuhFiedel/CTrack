@@ -25,21 +25,20 @@ namespace CTrack.Server.Services
             this.mapper = mapper;
         }
 
-        public async void RegisterUser(DTOUserLoginForm request)
+        public async Task RegisterUser(DTOUserLoginForm request)
         {
             UserModel model = UserModel.StandardUser(new Email(request.Email));
             model.PasswordHash = passwordHashService.Hash(request.Password);
             model.CreatedOn = DateTime.UtcNow;
             model.Id = Guid.NewGuid();
 
-            userRepo.Add(mapper.Map<UserModel, UserEntity>(model));
-
+            await userRepo.Add(mapper.Map<UserModel, UserEntity>(model));
         }
 
         //https://www.ais.com/how-to-generate-a-jwt-token-using-net-6/
-        public string Login(DTOUserLoginForm request)
+        public async Task<string> Login(DTOUserLoginForm request)
         {
-            UserModel? model = mapper.Map<UserModel?>(userRepo.GetUserByName(request.Email));
+            UserModel? model = mapper.Map<UserModel?>(await userRepo.GetUserByName(request.Email));
             if (model == null)
                 throw new ArgumentException($"User Not Found!");
 
@@ -51,9 +50,9 @@ namespace CTrack.Server.Services
             return token;
         }
 
-        public string CreateToken(UserModel user)
+        public static string CreateToken(UserModel user)
         {
-            List<Claim> claims = new List<Claim>()
+            List<Claim> claims = new()
             {
                 new Claim(ClaimTypes.Name, user.Email.Value),
                 new Claim(ClaimTypes.Role, UserRole.Standard.ToString())

@@ -10,8 +10,8 @@ namespace CTrack.Server.Shared.Contracts.Services
 {
     public interface IUserService
     {
-        public string Login(DTOUserLoginForm request);
-        public void RegisterUser(DTOUserLoginForm request);
+        public Task<string> Login(DTOUserLoginForm request);
+        public Task RegisterUser(DTOUserLoginForm request);
         
     }
 }

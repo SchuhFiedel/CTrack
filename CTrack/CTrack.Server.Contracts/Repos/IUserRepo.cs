@@ -4,6 +4,6 @@ namespace CTrack.Server.Shared.Contracts.Repos
 {
     public interface IUserRepo: ICTrackContext<UserEntity>
     {
-        public UserEntity? GetUserByName(string username);
+        public Task<UserEntity?> GetUserByName(string username);
     }
 }

@@ -76,7 +76,9 @@ namespace CTrack
             var list = new List<string>();
             var stack = new Stack<Assembly>();
 
-            stack.Push(Assembly.GetEntryAssembly());
+            var entryAssembly = Assembly.GetEntryAssembly();
+            if (entryAssembly != null)
+            stack.Push(entryAssembly);
 
             do
             {

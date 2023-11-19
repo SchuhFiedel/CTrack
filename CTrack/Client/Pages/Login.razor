@@ -15,10 +15,10 @@
 <ClockSpinner IsLoading=@IsLoading SpinnerText="We are logging you in mate!" LoaderType="ClockSpinner.LoaderTypes.TwoBubbles"></ClockSpinner>
 
 @code {
-    [Inject] protected HttpClient Http { get; set; }
-    [Inject] protected AuthenticationStateProvider authStateProvider { get; set; }
-    [Inject] protected ILocalStorageService localStorageService { get; set; }
-    [Inject] protected NavigationManager navigationmanager { get; set; }
+    [Inject] protected HttpClient Http { get; set; } = null!;
+    [Inject] protected AuthenticationStateProvider authStateProvider { get; set; } = null!;
+    [Inject] protected ILocalStorageService localStorageService { get; set; } = null!;
+    [Inject] protected NavigationManager navigationmanager { get; set; } = null!;
 
     DTOUserLoginForm user = new DTOUserLoginForm();
     bool IsLoading { get; set; }

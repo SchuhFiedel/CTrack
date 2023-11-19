@@ -67,8 +67,8 @@
     MudForm form = new MudForm();
     bool IsLoading { get; set; }
 
-    [Inject] protected HttpClient Http { get; set; }
-    [Inject] protected ILocalStorageService localStorageService { get; set; }
+    [Inject] protected HttpClient Http { get; set; } = null!;
+    [Inject] protected ILocalStorageService localStorageService { get; set; } = null!;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

@@ -39,29 +39,36 @@ namespace CTrackServer.DAL
                 $"Username={CustomEnvVarService.DataBaseUser}");
         }
 
-        public virtual Guid Add(Entity entity)
+        public virtual Task<Guid> Add(Entity entity)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void Update(Entity entity)
+        public virtual Task Update(Entity entity)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void Remove(Entity entity)
+        public virtual Task Remove(Entity entity)
         {
             throw new NotImplementedException();
         }
 
-        public virtual IQueryable Query()
+        public virtual IQueryable<Entity> Query()
         {
             throw new NotImplementedException();
         }
 
-        public virtual Entity? GetById(Guid id)
+        public virtual Task<Entity?> GetById(Guid id)
         {
             throw new NotImplementedException();
         }
+
+#pragma warning disable CS0114 // Element blendet vererbtes Element aus; fehlendes Überschreibungsschlüsselwort
+        public virtual Task<int> SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+#pragma warning restore CS0114 // Element blendet vererbtes Element aus; fehlendes Überschreibungsschlüsselwort
     }
 }

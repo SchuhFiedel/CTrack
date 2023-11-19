@@ -1,6 +1,7 @@
 ﻿using CTrack.Server.Shared.Contracts.Repos;
 using CTrack.Shared.Models.Entities;
 using CTrackServer.DAL;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,56 +19,57 @@ namespace CTrack.Server.DAL.Repos
             this.dbContext = (CTrackContext)dbContext;
         }
 
-        public Guid Add(UserEntity entity)
+        public async Task<Guid> Add(UserEntity entity)
         {
             if (dbContext.Users.Where(x => x.Email == entity.Email || x.Id == entity.Id).Any())
                 throw new ArgumentException($"User already exists!");
 
-            var entry = dbContext.Users.Add(entity);
+            var entry = await dbContext.Users.AddAsync(entity);
 
-            SaveChanges();
+            await SaveChanges();
 
             if (!entry.Entity.Id.HasValue)
                 throw new ApplicationException($"Insert did not return an object ID! {nameof(entity)}");
             return entry.Entity.Id.Value;
         }
 
-        public UserEntity? GetById(Guid id)
+        public async Task<UserEntity?> GetById(Guid id)
         {
-            return dbContext.Users.Where(x => x.Id == id).FirstOrDefault();
+            return await dbContext.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public UserEntity? GetUserByName(string username)
+        public async Task<UserEntity?> GetUserByName(string username)
         {
-            return this.dbContext.Users.Where(x => x.Email == username)
+            return await this.dbContext.Users.Where(x => x.Email == username)
                 .Select(p => new UserEntity() 
                 {   
                     Email = p.Email, 
                     Id = p.Id, 
                     PasswordHash = p.PasswordHash, 
                     Roles = p.Roles 
-                }).FirstOrDefault();
+                }).FirstOrDefaultAsync();
         }
 
-        public IQueryable Query()
+        public IQueryable<UserEntity> Query()
         {
             return this.dbContext.Users;
         }
 
-        public void Remove(UserEntity entity)
-        {
+        public async Task Remove(UserEntity entity) 
+        { 
             this.dbContext.Users.Remove(entity);
-            SaveChanges();
+            await SaveChanges();
         }
 
-        public int SaveChanges()
+        public async Task Update(UserEntity entity)
         {
-            return dbContext.SaveChanges();
+            this.dbContext.Users.Update(entity);
+            await SaveChanges();
         }
 
-        public void Update(UserEntity entity)
+        public async Task<int> SaveChanges()
         {
-            this.dbContext.Update(entity);
+            return await dbContext.SaveChangesAsync();
         }
     }
 }
