@@ -36,13 +36,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="wwwroot\css\app.css">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
+    <UpToDateCheckInput Remove="components\ClockSpinner.razor.scss" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="components\ClockSpinner.razor.scss" />
+    <Folder Include="Styles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="styles\app.scss" />
   </ItemGroup>
 
 </Project>
