@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@implements IErrorComponent
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -7,8 +8,41 @@
 <MudLayout>
     <NavMenu/>
 
-    <MudMainContent>
-        @Body
+    @if (isErrorActive)
+    {
+        <div class="error-alert">
+            <MudAlert Severity="MudBlazor.Severity.Error"
+                      Variant="Variant.Outlined"
+                      Elevation="15"
+                      ShowCloseIcon="true"
+                      CloseIconClicked="HideError">
+                @title
+            </MudAlert>
+        </div>
+    }
+
+    <MudMainContent >    
+        <CascadingValue Value="this" Name="ErrorComponent">
+            @Body
+        </CascadingValue>
     </MudMainContent>
 </MudLayout>
 
+@code{
+    bool isErrorActive;
+    string title = "";
+    string message = "";
+
+    public void ShowError(string title, string message)
+    {
+        this.isErrorActive = true;
+        this.title = title;
+        this.message = message;
+        StateHasChanged();
+    }
+
+    private void HideError()
+    {
+        isErrorActive = false;
+    }
+}
