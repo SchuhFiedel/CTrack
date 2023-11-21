@@ -1,3 +1,14 @@
+.error-alert {
+    position: absolute !important;
+    bottom: 5vh !important;
+    left: 50vw !important;
+    /*
+    width: 50vw !important;
+    height: 10vh !important;
+    */
+    z-index: 1000 !important;
+}
+
 .page {
     position: relative;
     display: flex;

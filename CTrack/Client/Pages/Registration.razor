@@ -68,6 +68,9 @@
     [Inject] protected HttpClient Http { get; set; } = null!;
     [Inject] protected ILocalStorageService localStorageService { get; set; } = null!;
 
+    [CascadingParameter(Name = "ErrorComponent")]
+    protected IErrorComponent ErrorComponent { get; set; } = null!;
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -104,8 +107,8 @@
                         Password = model.Password2
                     };
                 var result = await Http.PostAsJsonAsync("Auth/register", user);
-                Console.WriteLine($"REULT {result}");
-                Console.WriteLine($"READ AS STRINGASYNC{await result.Content.ReadAsStringAsync()}");
+                if (!result.IsSuccessStatusCode)
+                    throw new ArgumentException("Registration Unsuccessful!");
             }
             else
             {
@@ -115,7 +118,7 @@
         }
         catch(Exception e)
         {
-            Console.WriteLine(e);
+            ErrorComponent.ShowError(e.Message, e.StackTrace);
         }
         finally
         {

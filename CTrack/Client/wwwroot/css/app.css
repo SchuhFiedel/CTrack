@@ -8,6 +8,13 @@
 }
 html, body {
   font-family: "Geist Variable", sans-serif !important;
+  height: 100vh !important;
+  width: 100vw !important;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
 }
 
 h1:focus {

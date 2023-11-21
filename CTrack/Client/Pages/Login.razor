@@ -5,8 +5,6 @@
     <h1>Login</h1>
 </div>
 <div class="d-flex justify-center">
-    @*Validation=@this.Validator.ValidateValue @bind-Errors=@errors IsValid=@success*@
-    @*Disabled="@(!success)"*@
     <MudForm Model="@user" @ref=form
              >
         <MudGrid>
@@ -24,39 +22,16 @@
                                    Color="Color.Primary" Class="ml-auto" OnClick="HandleLogin">Login</MudButton>
                     </MudCardActions>
                 </MudCard>
-            </MudItem>
-            @*
-            <MudItem xs="12" sm="5">
-                <MudPaper Class="pa-4 mud-height-full">
-                    <MudText Typo="Typo.subtitle2">Validation Summary</MudText>
-                    @if (!success)
-                    {
-                        @success
-                        <MudText Color="@Color.Error">
-                            @foreach (var error in errors)
-                            {
-                                <MudText Color="@Color.Error">@error</MudText>
-                            }
-                        </MudText>
-
-                        @if (errors.Length <= 0)
-                        {
-                            success = true;
-                        }
-                    }
-                </MudPaper>
-            </MudItem>
-            *@
-            
+            </MudItem>            
             <MudItem xs="12">
                 <MudText Typo="Typo.body2" Align="Align.Center">
                     <MudLink Href="/registration">Click here if you want to register!</MudLink>
                 </MudText>
             </MudItem>
-            
         </MudGrid>
     </MudForm>
 </div>
+
 
 <ClockSpinner IsLoading=@IsLoading SpinnerText="We are logging you in mate!" LoaderType="ClockSpinner.LoaderTypes.TwoBubbles"></ClockSpinner>
 
@@ -66,9 +41,14 @@
     [Inject] protected ILocalStorageService localStorageService { get; set; } = null!;
     [Inject] protected NavigationManager navigationmanager { get; set; } = null!;
 
+    [CascadingParameter(Name = "ErrorComponent")]
+    protected IErrorComponent ErrorComponent { get; set; } = null!;
+
     DTOUserLoginForm user = new DTOUserLoginForm();
     MudForm form = new MudForm();
     bool IsLoading { get; set; }
+    string AlertText { get; set; } = "";
+    bool showErrorAlert { get; set; } = false;
 
     async Task HandleLogin()
     {
@@ -89,11 +69,17 @@
         }
         catch(Exception e)
         {
-            Console.WriteLine(e);
+            this.ErrorComponent.ShowError(e.Message, e.StackTrace);
         }
         finally
         {
             IsLoading = false;
         }
+    }
+
+    void CloseAlert()
+    {
+        showErrorAlert = false;
+        AlertText = "";
     }
 }
