@@ -1,0 +1,89 @@
+﻿@page "/calendar"
+@inject HttpClient Http
+
+<PageTitle>Calendar</PageTitle>
+
+<h1>Calendar</h1>
+
+<button @onclick="() => { MonthCounter --; CreateMonth(); }">PrevMonth</button>
+<h2>@monthName @monthStart.Year</h2>
+<button @onclick="() => { MonthCounter ++; CreateMonth(); }">NextMonth</button>
+
+<section>
+
+    @for (int i = 0; i < numDummyCol; i++)
+    {
+        <div>Dummy @((DayOfWeek)i+1)</div>
+    }
+
+    @for(int i = 1; i <= monthEnd.Day; i++)
+    {
+        List<CalendarItem> itemList = Items.Where(x => x.Date.Year == CurrentYear && x.Date.Month == CurrentMonth && x.Date.Day == i).ToList();
+        itemList.ForEach(x => Console.WriteLine(x.Name + " " + x.Date));
+
+        <div>
+            <h4>@i;</h4>
+            @foreach(var y in itemList)
+            {
+                <p>@y.Name;</p>
+                <p>@y.Date.Hour;</p>
+            }
+        </div>
+    }
+
+</section>
+
+@code{
+    string monthName = null!;
+    int numDummyCol = 0;
+    DateTime monthEnd;
+    DateTime monthStart;
+    int CurrentMonth;
+    int CurrentYear;
+    int MonthCounter = 0;
+
+    List<CalendarItem> Items = new List<CalendarItem>();
+
+    protected override void OnInitialized()
+    {
+        Items.Add(new() { Date = DateTime.Now.AddHours(5), Name = "Test+5h" });
+        Items.Add(new() { Date = DateTime.Now.AddDays(2), Name = "Test+2d" });
+        Items.Add(new() { Date = DateTime.Now.AddDays(5), Name = "Test+5d" });
+        Items.Add(new() { Date = DateTime.Now.AddDays(3), Name = "Test+3d" });
+        Items.Add(new() { Date = DateTime.Now.AddMonths(1), Name = "Test+1m" });
+        Console.WriteLine(DateTime.Now.Year);
+        CreateMonth();
+        base.OnInitialized();
+    }
+
+
+    void CreateMonth()
+    {
+        DateTime tempDate = DateTime.Now.AddMonths(MonthCounter);
+        CurrentMonth = tempDate.Month;
+        CurrentYear = tempDate.Year;
+
+        monthStart = new DateTime(CurrentYear, CurrentMonth, 1);
+        monthEnd = monthStart.AddMonths(1).AddDays(-1);
+
+        monthName = monthStart.Month switch
+        {
+            1 => "January",
+            2 => "February",
+            3 => "March",
+            4 => "April",
+            5 => "May",
+            6 => "June",
+            7 => "July",
+            8 => "Autust",
+            9 => "September",
+            10 => "October",
+            11 => "November",
+            12 => "December",
+            _ => "ERROR"
+        };
+
+        numDummyCol = ((int)monthStart.DayOfWeek)-1;
+    }
+}
+
