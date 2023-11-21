@@ -47,4 +47,14 @@
     <UpToDateCheckInput Remove="styles\app.scss" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Calendar.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="pages\Calendar.razor.scss" />
+  </ItemGroup>
+
 </Project>
