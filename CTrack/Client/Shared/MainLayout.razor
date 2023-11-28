@@ -20,33 +20,29 @@
     public void ShowError(string title, string message = "")
     {
         Console.WriteLine($"{title},{message}");
-        RenderFragment toastRenderFragment = GetToastRenderFragment(title, message);
-
-        SnackbarService.Add(toastRenderFragment, MudBlazor.Severity.Error);
+        this.ShowToast(title, message, MudBlazor.Severity.Error);
     }
 
     public void ShowWarning(string title, string message = "")
     {
-        RenderFragment toastRenderFragment = GetToastRenderFragment(title, message);
-
-        SnackbarService.Add(toastRenderFragment, MudBlazor.Severity.Warning);
+        this.ShowToast(title, message, MudBlazor.Severity.Warning);
     }
 
     public void ShowSuccess(string title, string message = "")
     {
-        RenderFragment toastRenderFragment = GetToastRenderFragment(title, message);
-
-        SnackbarService.Add(toastRenderFragment, MudBlazor.Severity.Success);
+        this.ShowToast(title, message, MudBlazor.Severity.Success);
     }
 
     public void ShowInfo(string title, string message = "")
     {
-        RenderFragment toastRenderFragment = GetToastRenderFragment(title, message);
-
-        SnackbarService.Add(toastRenderFragment, MudBlazor.Severity.Info);
+        this.ShowToast(title, message, MudBlazor.Severity.Info;
     }
 
-
+    public void ShowToast(string title, string message, MudBlazor.Severity severity)
+    {
+        RenderFragment toastRenderFragment = GetToastRenderFragment(title, message);
+        this.SnackbarService.Add(toastRenderFragment, severity);
+    }
 
     private RenderFragment GetToastRenderFragment(string title, string message)
     {
@@ -58,7 +54,7 @@
                  <p class="toast-message">@message</p>
              }
             </div>
-    );
+        );
         return toastRenderFragment;
     }
 }
