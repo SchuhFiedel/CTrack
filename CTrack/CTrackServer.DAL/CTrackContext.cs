@@ -13,17 +13,16 @@ namespace CTrackServer.DAL
 
         public CTrackContext()
         {
+            if (this.Database.CanConnect())
+            {
+                this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
-            this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+                if (CustomEnvVarService.DataBaseReset)
+                    this.Database.EnsureDeleted();
 
-            if (CustomEnvVarService.DataBaseReset)
-                this.Database.EnsureDeleted();
-
-            this.Database.EnsureCreated();
-
-            bool canConnect = this.Database.CanConnect();
-            Console.WriteLine("Can Connect To DB: " + canConnect);
-            if (!canConnect)
+                this.Database.EnsureCreated();
+            }
+            else 
             {
                 throw new ArgumentException(this.Database.GetConnectionString(), "ConnectionString");
             }
