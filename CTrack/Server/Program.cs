@@ -6,6 +6,7 @@ using System.Reflection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using CTrack.Server.Shared;
+using System.Text.Json.Serialization;
 
 namespace CTrack
 {
@@ -17,7 +18,14 @@ namespace CTrack
 
             // Add services to the container.
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().
+                AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                    options.JsonSerializerOptions.MaxDepth = 64;
+                    options.JsonSerializerOptions.IncludeFields = true;
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                }); ;
             builder.Services.AddRazorPages();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(GetAssemblies());
@@ -33,6 +41,8 @@ namespace CTrack
                         ValidateAudience = false                  
                     };
                 });
+
+            
 
             //register Services
             DependencyRegistrationManager.Register(builder.Services);

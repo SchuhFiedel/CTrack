@@ -5,11 +5,21 @@ using MudBlazor.Services;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Authorization;
 using MudBlazor;
+using System.Text.Json;
 
 namespace CTrack.Client
 {
     public class Program
     {
+        public static JsonSerializerOptions defaultJsonSerializerOptions = new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = null,
+            MaxDepth = 64,
+            IncludeFields = true,
+            ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+        };
+
+
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -23,7 +33,6 @@ namespace CTrack.Client
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
             builder.Services.AddAuthorizationCore();
-
 
             builder.Services.AddMudServices(config =>
             {
