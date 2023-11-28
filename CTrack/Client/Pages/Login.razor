@@ -42,13 +42,12 @@
     [Inject] protected NavigationManager navigationmanager { get; set; } = null!;
 
     [CascadingParameter(Name = "ErrorComponent")]
-    protected IErrorComponent ErrorComponent { get; set; } = null!;
+    protected IToastComponent ToastComponent { get; set; } = null!;
 
     DTOUserLoginForm user = new DTOUserLoginForm();
     MudForm form = new MudForm();
     bool IsLoading { get; set; }
     string AlertText { get; set; } = "";
-    bool showErrorAlert { get; set; } = false;
 
     async Task HandleLogin()
     {
@@ -62,24 +61,21 @@
                 throw new ArgumentException("Login Unsuccessful!");
 
             var token = await result.Content.ReadAsStringAsync();
-            Console.WriteLine(token);
             await localStorageService.SetItemAsync("token", token);
-            Console.WriteLine(await authStateProvider.GetAuthenticationStateAsync());
+
+            this.ToastComponent.ShowSuccess("Logged in successfully!");
+
+            await this.authStateProvider.GetAuthenticationStateAsync();
+
             navigationmanager.NavigateTo("/");
         }
         catch(Exception e)
         {
-            this.ErrorComponent.ShowError(e.Message, e.StackTrace);
+            this.ToastComponent.ShowError(e.Message, "Maybe you have not registered yet?");
         }
         finally
         {
             IsLoading = false;
         }
-    }
-
-    void CloseAlert()
-    {
-        showErrorAlert = false;
-        AlertText = "";
     }
 }

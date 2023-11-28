@@ -69,7 +69,7 @@
     [Inject] protected ILocalStorageService localStorageService { get; set; } = null!;
 
     [CascadingParameter(Name = "ErrorComponent")]
-    protected IErrorComponent ErrorComponent { get; set; } = null!;
+    protected IToastComponent ToastComponent { get; set; } = null!;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -118,7 +118,7 @@
         }
         catch(Exception e)
         {
-            ErrorComponent.ShowError(e.Message, e.StackTrace);
+            ToastComponent.ShowError(e.Message, e.StackTrace ?? "");
         }
         finally
         {

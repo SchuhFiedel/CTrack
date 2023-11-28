@@ -1,12 +1,20 @@
-.error-alert {
-    position: absolute !important;
-    bottom: 5vh !important;
-    left: 50vw !important;
-    /*
-    width: 50vw !important;
-    height: 10vh !important;
-    */
-    z-index: 1000 !important;
+.toast-div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    flex-direction: column;
+
+    .toast-title {
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    .toast-message {
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
 }
 
 .page {

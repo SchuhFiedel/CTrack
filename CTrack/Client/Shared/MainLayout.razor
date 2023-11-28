@@ -1,5 +1,6 @@
-﻿@inherits LayoutComponentBase
-@implements IErrorComponent
+﻿@inherits LayoutComponentBase;
+@implements IToastComponent;
+@inject ISnackbar SnackbarService;
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -7,20 +8,6 @@
 
 <MudLayout>
     <NavMenu/>
-
-    @if (isErrorActive)
-    {
-        <div class="error-alert">
-            <MudAlert Severity="MudBlazor.Severity.Error"
-                      Variant="Variant.Outlined"
-                      Elevation="15"
-                      ShowCloseIcon="true"
-                      CloseIconClicked="HideError">
-                @title
-            </MudAlert>
-        </div>
-    }
-
     <MudMainContent >    
         <CascadingValue Value="this" Name="ErrorComponent">
             @Body
@@ -29,20 +16,50 @@
 </MudLayout>
 
 @code{
-    bool isErrorActive;
-    string title = "";
-    string message = "";
 
-    public void ShowError(string title, string message)
+    public void ShowError(string title, string message = "")
     {
-        this.isErrorActive = true;
-        this.title = title;
-        this.message = message;
-        StateHasChanged();
+        Console.WriteLine($"{title},{message}");
+        RenderFragment toastRenderFragment = GetToastRenderFragment(title, message);
+
+        SnackbarService.Add(toastRenderFragment, MudBlazor.Severity.Error);
     }
 
-    private void HideError()
+    public void ShowWarning(string title, string message = "")
     {
-        isErrorActive = false;
+        RenderFragment toastRenderFragment = GetToastRenderFragment(title, message);
+
+        SnackbarService.Add(toastRenderFragment, MudBlazor.Severity.Warning);
+    }
+
+    public void ShowSuccess(string title, string message = "")
+    {
+        RenderFragment toastRenderFragment = GetToastRenderFragment(title, message);
+
+        SnackbarService.Add(toastRenderFragment, MudBlazor.Severity.Success);
+    }
+
+    public void ShowInfo(string title, string message = "")
+    {
+        RenderFragment toastRenderFragment = GetToastRenderFragment(title, message);
+
+        SnackbarService.Add(toastRenderFragment, MudBlazor.Severity.Info);
+    }
+
+
+
+    private RenderFragment GetToastRenderFragment(string title, string message)
+    {
+        RenderFragment toastRenderFragment = new RenderFragment(
+        @<div class="toast-div">
+            <h5 class="toast-title">@title</h5>
+            @if (!String.IsNullOrEmpty(message))
+             {
+                 <p class="toast-message">@message</p>
+             }
+            </div>
+    );
+        return toastRenderFragment;
     }
 }
+

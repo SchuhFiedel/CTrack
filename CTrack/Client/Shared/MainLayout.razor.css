@@ -1,9 +1,18 @@
-.error-alert {
-    position: absolute !important;
-    bottom: 5em !important;
-    transform: translateX(-50%);
-    left: 50vw;
-    z-index: 1000 !important;
+.toast-div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+  flex-direction: column;
+}
+.toast-div .toast-title {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.toast-div .toast-message {
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
 
 .page {
