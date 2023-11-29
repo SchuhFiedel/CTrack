@@ -1,0 +1,24 @@
+﻿@using CTrack.Client.Classes;
+@inherits AbstractCalendar
+
+<CascadingValue Value="DisplayedView" Name="SelectedView">
+	<CascadingValue Value="FirstDate" Name="FirstDate">
+		<CascadingValue Value="TasksList" Name="TasksList">
+			@ChildContent
+		</CascadingValue>
+	</CascadingValue>
+</CascadingValue>
+
+@code {
+	[Parameter]
+	public RenderFragment ChildContent { get; set; } = null!;
+
+	[Parameter]
+	public DateTime FirstDate { get; set; }
+
+	[Parameter]
+	public DisplayedView DisplayedView { get; set; }
+
+	[Parameter]
+	public DTOCalendarEntry[]? TasksList { get; set; }
+}
