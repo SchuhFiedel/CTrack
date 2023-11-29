@@ -1,5 +1,6 @@
 ﻿@page "/calendar"
-@inject HttpClient Http
+@using System.Linq;
+@using System.Text.Json;
 
 <PageTitle>Calendar</PageTitle>
 
@@ -18,7 +19,7 @@
 
     @for(int i = 1; i <= monthEnd.Day; i++)
     {
-        List<CalendarItem> itemList = Items.Where(x => x.Date.Year == CurrentYear && x.Date.Month == CurrentMonth && x.Date.Day == i).ToList();
+        List<DTOCalendarEntry> itemList = Items.Where(x => x.Date.Year == CurrentYear && x.Date.Month == CurrentMonth && x.Date.Day == i).ToList();
         itemList.ForEach(x => Console.WriteLine(x.Name + " " + x.Date));
 
         <div>
@@ -27,6 +28,16 @@
             {
                 <p>@y.Name;</p>
                 <p>@y.Date.Hour;</p>
+                
+                @if (y.TagList != null && y.TagList.Any())
+                {
+                    <ul>
+                        @foreach (var l in y.TagList)
+                        {
+                            <li>@l.Name</li>
+                        }
+                    </ul>
+                }
             }
         </div>
     }
@@ -34,6 +45,8 @@
 </section>
 
 @code{
+    [Inject] HttpClient Http { get; set; } = null;
+
     string monthName = null!;
     int numDummyCol = 0;
     DateTime monthEnd;
@@ -42,16 +55,15 @@
     int CurrentYear;
     int MonthCounter = 0;
 
-    List<CalendarItem> Items = new List<CalendarItem>();
+    List<DTOCalendarEntry> Items = new List<DTOCalendarEntry>();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        Items.Add(new() { Date = DateTime.Now.AddHours(5), Name = "Test+5h" });
-        Items.Add(new() { Date = DateTime.Now.AddDays(2), Name = "Test+2d" });
-        Items.Add(new() { Date = DateTime.Now.AddDays(5), Name = "Test+5d" });
-        Items.Add(new() { Date = DateTime.Now.AddDays(3), Name = "Test+3d" });
-        Items.Add(new() { Date = DateTime.Now.AddMonths(1), Name = "Test+1m" });
-        Console.WriteLine(DateTime.Now.Year);
+
+        var result = await Http.GetAsync("CalendarEntry");
+        var tmpList = (await result.Content.ReadFromJsonAsync<IEnumerable<DTOCalendarEntry>>(Program.defaultJsonSerializerOptions))?.ToList();
+        Console.WriteLine(String.Join(Environment.NewLine,tmpList));
+        this.Items = tmpList;
         CreateMonth();
         base.OnInitialized();
     }
