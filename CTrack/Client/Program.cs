@@ -6,6 +6,7 @@ using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Authorization;
 using MudBlazor;
 using System.Text.Json;
+using CTrack.Client.Classes;
 
 namespace CTrack.Client
 {
